@@ -1,0 +1,14 @@
+/*
+ * @author:tqtan;
+ * @date:14/5/12;
+ * @content:游戏样式表;
+*/
+
+body{margin:0;background-color: #000;}
+*{font-family: Helvitica,Microsoft yahei,tohama,arial;-webkit-font-smoothing:antialiased;}
+
+#header{position: fixed;top: 0;width: 100%;height: 60px;background-color: rgba(255,255,255,0.7);z-index: 2;transition:all .2s ease-out;}
+#header:hover{background-color: rgba(255,255,255,1.0);}
+#header p{text-align: center;color: #770000;line-height: 60px;margin: 0;font-size: 22px;}
+
+#game{display: block;position: absolute;width: 100%;height: 100%;}
