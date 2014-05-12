@@ -38,11 +38,11 @@ window.onkeydown = function (e) {
    }
 
    if (key === 37) { // left arrow
-      climbUp.roleX = climbUp.toLeft;
+      climbUp.roleX = climbUp.toRight;
    }
 
    else if (key === 39) { // right arrow
-      climbUp.roleX = climbUp.toRight;
+      climbUp.roleX = climbUp.toLeft;
    }
 };
 
