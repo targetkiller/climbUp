@@ -46,6 +46,16 @@ window.onkeydown = function (e) {
    }
 };
 
+// 鼠标或触摸响应.......................................................
+document.addEventListener('touchstart',function(ev){
+	if(ev.touches[0].pageX>climbUp.Bwidth/2){
+      climbUp.roleX = climbUp.toLeft;
+	}
+	else{  
+      climbUp.roleX = climbUp.toRight;
+	}
+},false);	
+
 var ClimbUp = function(){
 	// init ---------------------------
 	this.canvas = document.getElementById('game'),
