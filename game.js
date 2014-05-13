@@ -175,6 +175,7 @@ ClimbUp.prototype = {
 		this.branchsInit.execute();
 		document.getElementById('gameover').style.display="none";
 		document.getElementById('score').innerText=this.score;
+		document.getElementById('funnyInfo').innerText="平地";
 		this.stopGame = false;
 	},
 	drawAll:function(){
@@ -343,7 +344,7 @@ ClimbUp.prototype = {
 		if(this.changeSideDir==1){
 			left = climbUp.toLeft;
 			right = climbUp.toRight;
-			document.getElementsByTagName('body')[0].style.backgroundColor = "#333";
+			document.getElementsByTagName('body')[0].style.backgroundColor = "#000";
 			this.changeSideDir = 0;
 		}
 		else{
