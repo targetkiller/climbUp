@@ -2,13 +2,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>向上爬-html5游戏</title>
+	<title>爬楼梯</title>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
-	<!-- <header id="header"><p>向上爬</p></header> -->
+<body style="background-color: #000;">
 	<canvas id="game" width="500px" height="500px"></canvas>
-	<div id="gameover" style="display:none">game over</div>
+	<div id="gameover" style="display:none">game over<p id="showScore">恭喜你,你爬到了<span id="finalScore">0</span>楼！</p><a href="javascript:void(0)" id="restart">restart</a></div>
+	<!-- <div id="speed-wrap">当前速度: <span id="speed">0</span></div> -->
+	<div id="score-wrap">你在<span id="score">0</span>楼</div>
 	<script src="game.js"></script>
+	<audio id='coin-sound' >
+       <source src='jump.mp3' type='audio/mp3'>
+       <source src='jump.ogg' type='audio/ogg'>
+    </audio>
 </body>
 </html>

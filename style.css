@@ -4,15 +4,27 @@
  * @content:游戏样式表;
 */
 
-body{margin:0;background-color: #000;}
+body{margin:0;transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-ms-transition:all .2s ease-out;}
 *{font-family: Helvitica,Microsoft yahei,tohama,arial;-webkit-font-smoothing:antialiased;}
 
-#header{position: fixed;top: 0;width: 100%;height: 60px;background-color: rgba(255,255,255,0.7);z-index: 2;transition:all .2s ease-out;}
-#header:hover{background-color: rgba(255,255,255,1.0);}
-#header p{text-align: center;color: #770000;line-height: 60px;margin: 0;font-size: 22px;}
-
-#game{display: block;position: absolute;width: 100%;height: 100%;}
+#game{display: block;position: absolute;width: 100%;height: 100%;
+	/*开启GPU*/
+	-webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);}
 
 #gameover{position: absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);color: #fff;
-	width: 300px;height: 300px;background-color: rgba(177,32,58,0.8);line-height: 300px;text-align: center;font-size: 40px;
+	width: 300px;height: 300px;background-color: rgba(177,32,58,0.8);line-height: 230px;text-align: center;font-size: 40px;
 	transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-ms-transition:all .2s ease-out;}
+#restart{position: absolute;text-decoration: none;color: #fff;display: block;font-size: 22px;top: 0;line-height: 30px;
+	top:80%;left:50%;-webkit-transform:translate(-50%,-50%);border: 1px solid #fff;padding: 4px 12px;border-radius: 8px;
+	transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-ms-transition:all .2s ease-out;}
+#restart:hover{background-color: #ddd;color: #770000;}
+#showScore{position: absolute;top: 40px;text-align: center;width: 300px;font-size: 24px;margin: 0;}
+#finalScore{color: yellow;}
+
+#speed-wrap,#score-wrap{position: fixed;right: 0px;top: 0px;color: #fff;font-size: 16px;background-color: #770000;padding: 4px 8px;}
+#speed,#score{color: yellow;font-size: 16px;}
+#score-wrap{top: 0px;}
