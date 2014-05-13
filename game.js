@@ -115,6 +115,7 @@ var ClimbUp = function(){
 	this.branchs = [],
 	this.branchsSpeed = 5,
 	this.branchsVelocity = 0.005,
+	this.branchsSpeedMax = 25,
 	this.branchsNum = 1,
 
 	this.roleWidth = 40,
@@ -173,6 +174,7 @@ ClimbUp.prototype = {
 		this.branchs=[];
 		this.branchsInit.execute();
 		document.getElementById('gameover').style.display="none";
+		document.getElementById('score').innerText=this.score;
 		this.stopGame = false;
 	},
 	drawAll:function(){
@@ -196,7 +198,10 @@ ClimbUp.prototype = {
 			}
 		}
 		// 游戏加速
-		this.branchsSpeed += this.branchsVelocity;
+		if(this.branchsSpeed<this.branchsSpeedMax){
+			this.branchsSpeed += this.branchsVelocity;
+			// document.getElementById('speed').innerText=this.branchsSpeed;
+		}
 		//document.getElementById('speed').innerText=this.branchsSpeed.toFixed(2);
 		
 	},
@@ -218,6 +223,8 @@ ClimbUp.prototype = {
 				// 游戏增分
 				this.score += this.scoreVelocity;
 				document.getElementById('score').innerText=this.score;
+				this.showFunnyInfo();
+
 				// climbUp.coinSound.play();
 				document.getElementById('coin-sound').play();
 				this.branchs=[];
@@ -231,6 +238,72 @@ ClimbUp.prototype = {
 		this.ctx.fillStyle = this.roleColor;
 		this.ctx.fillRect(this.roleX,this.roleY,this.roleWidth,this.roleHeight);
 		this.ctx.restore();
+	},
+	showFunnyInfo:function(){
+		var now = this.score;
+		var result = "平地";
+		if(now < 5){
+			result = "小别墅";
+		}
+		else if(now < 10){
+			result = "普通大厦";
+		}
+		else if(now < 20){
+			result = "高级大厦";
+		}
+		else if(now < 30){
+			result = "台北101";
+		}
+		else if(now < 40){
+			result = "吉隆波双子塔";
+		}
+		else if(now < 50){
+			result = "上海东方明珠";
+		}
+		else if(now < 60){
+			result = "安纳普尔纳峰";
+		}
+		else if(now < 70){
+			result = "南迦帕尔巴特峰";
+		}
+		else if(now < 80){
+			result = "马纳斯鲁峰";
+		}
+		else if(now < 90){
+			result = "道拉吉里峰";
+		}
+		else if(now < 100){
+			result = "卓奥友峰";
+		}
+		else if(now < 110){
+			result = "马卡鲁峰";
+		}
+		else if(now < 120){
+			result = "洛子峰";
+		}
+		else if(now < 130){
+			result = "干城章嘉峰";
+		}
+		else if(now < 140){
+			result = "乔戈里峰";
+		}
+		else if(now < 150){
+			result = "珠穆朗玛峰";
+		}
+		else if(now < 160){
+			result = "云层";
+		}
+		else if(now < 170){
+			result = "天堂";
+		}
+		else if(now < 180){
+			result = "地球表面";
+		}
+		else{
+			result = "外太空";
+		}
+
+		document.getElementById('funnyInfo').innerText=result;
 	},
 	// 碰撞检测
 	isCollide:function(){
