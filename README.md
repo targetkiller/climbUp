@@ -14,3 +14,5 @@ climbUp
 
 bug:
 不同手机不同浏览器可能会显得卡顿（特别内置微信浏览器），请尝试用chrome或者opera。
+
+[体验地址](http://targetkiller.net/climbUp/index.html)
