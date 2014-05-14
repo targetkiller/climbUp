@@ -92,9 +92,9 @@ window.onkeydown = function (e) {
    }
 };
 
-window.onresize = function (e) {
-   location.reload();
-};
+// window.onresize = function (e) {
+//    location.reload();
+// };
 
 // 重力感应
 function Orientation(selector) {
