@@ -1,5 +1,6 @@
 /*
  * @author:tqtan;
+ * @site:http://targetkiller.net;
  * @date:14/5/12;
  * @content:游戏逻辑代码;
 */
@@ -196,7 +197,7 @@ var ClimbUp = function(){
 
 	// 微信分享
 	this.imgUrl = 'http://targetkiller.net/climbUp/icon.jpg';
-	this.lineLink = 'http://targetkiller.net';
+	this.lineLink = 'http://targetkiller.net/climbUp/index.html';
 	this.descContent = "爬楼梯的我根本就停不下来！";
 	this.shareTitle = '一起来和我爬楼梯，我们比比分～';
 	this.appid = '';
