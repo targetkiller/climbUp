@@ -3,30 +3,30 @@
  * @date:14/5/12;
  * @content:游戏逻辑代码;
 */
-window.RAF =
-   (function () {
-      return window.requestAnimationFrame   ||
-         window.webkitRequestAnimationFrame ||
-         window.mozRequestAnimationFrame    ||
-         window.oRequestAnimationFrame      ||
-         window.msRequestAnimationFrame     ||
+// window.RAF =
+//    (function () {
+//       return window.requestAnimationFrame   ||
+//          window.webkitRequestAnimationFrame ||
+//          window.mozRequestAnimationFrame    ||
+//          window.oRequestAnimationFrame      ||
+//          window.msRequestAnimationFrame     ||
 
-         function (callback, element) {
-            var start,
-                finish;
+//          function (callback, element) {
+//             var start,
+//                 finish;
 
-            window.setTimeout( function () {
-               start = +new Date();
-               callback(start);
-               finish = +new Date();
+//             window.setTimeout( function () {
+//                start = +new Date();
+//                callback(start);
+//                finish = +new Date();
 
-               self.timeout = 1000 / 60 - (finish - start);
+//                self.timeout = 1000 / 60 - (finish - start);
 
-            }, self.timeout);
-         };
-      }
-   )
-();
+//             }, self.timeout);
+//          };
+//       }
+//    )
+// ();
 
 // 键盘控制响应.......................................................
 window.onkeydown = function (e) {
@@ -42,47 +42,54 @@ window.onkeydown = function (e) {
    }
 };
 
-// 鼠标或触摸响应.......................................................
-document.addEventListener('touchstart',function(ev){
-	if(ev.touches[0].pageX<climbUp.Bwidth/2){
-      climbUp.roleX = climbUp.toLeft;
+// 重力感应
+function Orientation(selector) {
+	          
+}
+
+Orientation.prototype.init = function(){
+    window.addEventListener('deviceorientation', this.orientationListener, false);
+}
+
+Orientation.prototype.orientationListener = function(evt) {
+  var gamma = evt.gamma
+  var beta = evt.beta
+  var alpha = evt.alpha
+
+  if(climbUp.optWay==1&&climbUp.changeSideDir==0){
+	if(gamma<0){
+	  	climbUp.roleX = climbUp.toLeft;
 	}
-	else{  
-      climbUp.roleX = climbUp.toRight;
+	else{
+	  	climbUp.roleX = climbUp.toRight;
 	}
+  }
+  else if(climbUp.optWay==1&&climbUp.changeSideDir==1){
+  	if(gamma>0){
+	  	climbUp.roleX = climbUp.toLeft;
+	}
+	else{
+	  	climbUp.roleX = climbUp.toRight;
+	}	
+  }
+}
+
+// 开始游戏.......................................................
+// 触摸
+var shake = document.getElementById('shake');
+shake.addEventListener('click',function(ev){
+	document.getElementById('gametips').style.opacity="0";
+	climbUp.optWay = 1;//摆动操作
+	climbUp.start();
 },false);
 
-// 重力感应
-// function Orientation(selector) {
-	          
-// }
-
-// Orientation.prototype.init = function(){
-//     window.addEventListener('deviceorientation', this.orientationListener, false);
-// }
-
-// Orientation.prototype.orientationListener = function(evt) {
-//   var gamma = evt.gamma
-//   var beta = evt.beta
-//   var alpha = evt.alpha
-
-//   if(climbUp.changeSideDir==0){
-// 	if(gamma<0){
-// 	  	climbUp.roleX = climbUp.toLeft;
-// 	}
-// 	else{
-// 	  	climbUp.roleX = climbUp.toRight;
-// 	}
-//   }
-//   else{
-//   	if(gamma>0){
-// 	  	climbUp.roleX = climbUp.toLeft;
-// 	}
-// 	else{
-// 	  	climbUp.roleX = climbUp.toRight;
-// 	}	
-//   }
-// }
+// 点击
+var point = document.getElementById('point');
+point.addEventListener('click',function(ev){
+	document.getElementById('gametips').style.opacity="0";
+	climbUp.optWay = 0;//点击操作
+	climbUp.start();
+},false);
 
 // 重新开始游戏.......................................................
 var restart = document.getElementById('restart');
@@ -100,11 +107,6 @@ var ClimbUp = function(){
 	this.canvas.height = this.Bheight,
 
 	// setting ------------------------
-	// this.coinSound = document.getElementById('coin-sound'),
-	// this.audioTracks = [new Audio()],
-	// this.COIN_VOLUME = 1.0,
-	// this.coinSound.volume = this.COIN_VOLUME,
-
 	this.treeWidth = 40,
 	this.treeHeight = this.Bheight,
 	this.treeColor = "#770000",
@@ -136,6 +138,8 @@ var ClimbUp = function(){
 	this.changeSideDir = 0;//0:正,1:反
 
 	this.stopGame = false;
+	// 操作方式 点击，摆动
+	this.optWay = 0;//0点击，1摆动
 	// control ------------------------
 	this.branchsInit = {
 		execute:function(){
@@ -159,12 +163,24 @@ ClimbUp.prototype = {
 		// init
 		this.branchs=[];
 		this.branchsInit.execute();
-		RAF(function(){climbUp.animate();});
+		// RAF(function(){climbUp.animate();});
+		if(climbUp.optWay==0){
+			// 鼠标或触摸响应.......................................................
+			document.addEventListener('touchstart',function(ev){
+				if(ev.touches[0].pageX<climbUp.Bwidth/2){
+			      climbUp.roleX = climbUp.toLeft;
+				}
+				else{  
+			      climbUp.roleX = climbUp.toRight;
+				}
+			},false);
+		}
+		climbUp.interval = setInterval(function(){climbUp.animate();},1000/60);
 	},
 	animate:function(){
 		this.ctx.clearRect(0,0,this.Bwidth,this.Bheight);
 		this.drawAll();
-		RAF(function(){climbUp.animate();});
+		// RAF(function(){climbUp.animate();});
 	},
 	reset:function(){
 		this.branchsVelocity = 0.01;
@@ -365,15 +381,17 @@ ClimbUp.prototype = {
 		   }
 		};
 
-		// 鼠标或触摸响应.......................................................
-		document.addEventListener('touchstart',function(ev){
-			if(ev.touches[0].pageX<climbUp.Bwidth/2){
-		      climbUp.roleX = left;
-			}
-			else{  
-		      climbUp.roleX = right;
-			}
-		},false);
+		if(climbUp.optWay==0){
+			// 鼠标或触摸响应.......................................................
+			document.addEventListener('touchstart',function(ev){
+				if(ev.touches[0].pageX<climbUp.Bwidth/2){
+			      climbUp.roleX = left;
+				}
+				else{  
+			      climbUp.roleX = right;
+				}
+			},false);
+		}
 
 		// 重新设置下一次转向时间
 		this.startTime = +new Date();
@@ -382,6 +400,8 @@ ClimbUp.prototype = {
 }
 
 var climbUp = new ClimbUp();
-climbUp.start();
-// (new Orientation()).init();
+(new Orientation()).init();
+
+
+
 

@@ -8,9 +8,15 @@
 <body style="background-color: #000;">
 	<canvas id="game" width="500px" height="500px"></canvas>
 	<div id="gameover" style="display:none">game over
-	<p id="showScore">恭喜你,你爬到了<span id="finalScore">0</span>楼！</p>
-	<p id="showInfo">你登上了<span id="funnyInfo">平地</span></p>
-	<a href="javascript:void(0)" id="restart">restart</a></div>
+		<p id="showScore">恭喜你,你爬到了<span id="finalScore">0</span>楼！</p>
+		<p id="showInfo">你登上了<span id="funnyInfo">平地</span></p>
+		<a href="javascript:void(0)" id="restart">restart</a>
+	</div>
+	<div id="gametips">
+		<p>点击屏幕(摆动手机)躲过一切障碍！<br />背景颜色改变？试试<span class="yellow">相反</span>操作？<br /><span class="tips">(若感觉卡，请换个浏览器试试)</span></p>
+		<a href="javascript:void(0)" id="shake">用摆的</a>
+		<a href="javascript:void(0)" id="point">用点的</a>
+	</div>
 	<!-- <div id="speed-wrap">当前速度: <span id="speed">0</span></div> -->
 	<div id="score-wrap">你在<span id="score">0</span>楼</div>
 	<script src="game.js"></script>

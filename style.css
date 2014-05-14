@@ -14,15 +14,20 @@ body{margin:0;transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-m
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
     transform: translateZ(0);}
-
-#gameover{position: absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);color: #fff;
+#gametips,#gameover{position: absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);color: #fff;
 	width: 300px;height: 300px;background-color: rgba(177,32,58,0.8);line-height: 190px;text-align: center;font-size: 40px;
 	transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-ms-transition:all .2s ease-out;}
-#restart{position: absolute;text-decoration: none;color: #fff;display: block;font-size: 22px;top: 0;line-height: 30px;
+#gameover{z-index: 9999;}
+#gametips{font-size: 18px;height: 100px;padding:100px 0;opacity: 1;z-index: 9998}
+#gametips p{line-height: 30px;margin: 0;}
+#gametips p .tips{font-size: 14px;color: #aaa;}
+#shake,#point,#restart{position: absolute;text-decoration: none;color: #fff;display: block;font-size: 22px;top: 0;line-height: 30px;
 	top:78%;left:50%;-webkit-transform:translate(-50%,-50%);border: 1px solid #fff;padding: 4px 12px;border-radius: 8px;
 	transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-ms-transition:all .2s ease-out;}
-#restart:hover{background-color: #ddd;color: #770000;}
-#showScore{position: absolute;top: 50px;text-align: center;width: 300px;font-size: 24px;margin: 0;}
+#shake{left: 35%;font-size: 18px}
+#point{left: 65%;font-size: 18px}
+#point:hover,#shake:hover,#restart:hover{background-color: #ddd;color: #770000;}
+#showScore{position: absolute;top: 50px;text-align: center;width: 300px;font-size: 24px;margin: 0;z-index: 20}
 #finalScore{color: yellow;}
 #showInfo{position: absolute;top: 85px;text-align: center;width: 300px;font-size: 18px;margin: 0;}
 #funnyInfo{color: yellow;}
@@ -30,3 +35,5 @@ body{margin:0;transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-m
 #speed-wrap,#score-wrap{position: fixed;right: 0px;top: 0px;color: #fff;font-size: 16px;background-color: #770000;padding: 4px 8px;}
 #speed,#score{color: yellow;font-size: 16px;}
 #speed-wrap{top: 60px;}
+
+.yellow{color: yellow;}
