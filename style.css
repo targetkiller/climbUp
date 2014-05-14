@@ -22,7 +22,7 @@ body{margin:0;transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-m
 #gametips{font-size: 18px;height: 100px;padding:100px 0;z-index: 9998}
 #gametips p{line-height: 30px;margin: 0;}
 #gametips p .tips{font-size: 14px;color: #aaa;}
-#shake,#point,#restart{position: absolute;text-decoration: none;color: #fff;display: block;font-size: 22px;top: 0;line-height: 30px;
+#shake,#point,#restart{position: absolute;text-decoration: none;color: #fff;display: block;font-size: 22px;z-index:9999;line-height: 30px;
 	top:78%;left:50%;-webkit-transform:translate(-50%,-50%);border: 1px solid #fff;padding: 4px 12px;border-radius: 8px;
 	transition:all .2s ease-out;-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-ms-transition:all .2s ease-out;}
 #shake{left: 35%;font-size: 18px}
