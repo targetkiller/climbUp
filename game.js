@@ -28,6 +28,55 @@
 //    )
 // ();
 
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+        "appid": climbUp.appid,
+        "img_url": climbUp.imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": climbUp.lineLink,
+        "desc": climbUp.descContent,
+        "title": climbUp.shareTitle
+    }, function(res) {
+        //_report('send_msg', res.err_msg);
+    })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+        "img_url": climbUp.imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": climbUp.lineLink,
+        "desc": climbUp.descContent,
+        "title": climbUp.shareTitle
+    }, function(res) {
+           //_report('timeline', res.err_msg);
+    });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+        "content": climbUp.descContent,
+        "url": climbUp.lineLink,
+    }, function(res) {
+        //_report('weibo', res.err_msg);
+    });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        shareFriend();
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+        shareTimeline();
+    });
+    // 分享到微博
+    WeixinJSBridge.on('menu:share:weibo', function(argv){
+        shareWeibo();
+    });
+}, false);
+
 // 键盘控制响应.......................................................
 window.onkeydown = function (e) {
    var key = e.keyCode;
@@ -144,6 +193,14 @@ var ClimbUp = function(){
 	this.stopGame = false;
 	// 操作方式 点击，摆动
 	this.optWay = 0;//0点击，1摆动
+
+	// 微信分享
+	this.imgUrl = 'http://targetkiller.net/climbUp/icon.jpg';
+	this.lineLink = 'http://targetkiller.net';
+	this.descContent = "爬楼梯的我根本就停不下来！";
+	this.shareTitle = '一起来和我爬楼梯，我们比比分～';
+	this.appid = '';
+
 	// control ------------------------
 	this.branchsInit = {
 		execute:function(){
@@ -211,6 +268,7 @@ ClimbUp.prototype = {
 			this.scoreVelocity = 0;
 			this.branchs = [];
 			this.stopGame = true;
+			this.shareTitle = "我在爬楼梯游戏中登上了"+climbUp.showFunnyInfo(this.score)+", 得分"+this.score+"!来超越我吧～";
 		}
 		if(!this.stopGame){
 			if(this.isNeedChangeSide()){
@@ -244,7 +302,7 @@ ClimbUp.prototype = {
 				// 游戏增分
 				this.score += this.scoreVelocity;
 				document.getElementById('score').innerText=this.score;
-				this.showFunnyInfo();
+				this.showFunnyInfo(this.score);
 
 				// climbUp.coinSound.play();
 				document.getElementById('coin-sound').play();
@@ -260,8 +318,8 @@ ClimbUp.prototype = {
 		this.ctx.fillRect(this.roleX,this.roleY,this.roleWidth,this.roleHeight);
 		this.ctx.restore();
 	},
-	showFunnyInfo:function(){
-		var now = this.score;
+	showFunnyInfo:function(score){
+		var now = score;
 		var result = "平地";
 		if(now < 5){
 			result = "小别墅";
@@ -325,6 +383,7 @@ ClimbUp.prototype = {
 		}
 
 		document.getElementById('funnyInfo').innerText=result;
+		return result;
 	},
 	// 碰撞检测
 	isCollide:function(){
