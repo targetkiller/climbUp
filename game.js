@@ -139,7 +139,7 @@ shake.addEventListener('click',function(ev){
 // 点击
 var point = document.getElementById('point');
 point.addEventListener('click',function(ev){
-	document.getElementById('gametips').style.opacity="0";
+	document.getElementById('gametips').style.display="none";
 	climbUp.optWay = 0;//点击操作
 	climbUp.start();
 },false);
