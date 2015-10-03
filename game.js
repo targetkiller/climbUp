@@ -1,6 +1,6 @@
 /*
  * @author:tqtan;
- * @site:http://targetkiller.net;
+ * @site:http://tqtan.com;
  * @date:14/5/12;
  * @content:游戏逻辑代码;
 */
